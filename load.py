@@ -1,21 +1,62 @@
+
 import csv
 import numpy
 
-# reader = csv.reader(open('ConnectiesHolland.csv', 'rb'), delimiter = ',')
-# x = list(reader)
-# ConnectiesHolland = numpy.array(x).astype("string")
-# print ConnectiesHolland
 
-# read csv file from directory
+
+class Graph(object):
+
+    def __init__(self, graph_dict=None):
+        if graph_dict == None:
+            graph_dict = {}
+        self.__graph_dict = graph_dict
+
+	def vertices(self):
+		return list(self.__graph_dict.keys())
+
+	def edges(self):
+		return self.__generate_edges()
+
+    def add_vertex(self, vertex):
+        if vertex not in self.__graph_dict:
+            self.__graph_dict[vertex] = []
+
+    def add_edge(self, edge):
+        edge = set(edge)
+        (vertex1, vertex2) = tuple(edge)
+        if vertex1 in self.__graph_dict:
+        	self.__graph_dict[vertex1].append(vertex2)
+        	self.__graph_dict[vertex2].append(vertex1)
+        else:
+            self.__graph_dict[vertex1] = [vertex2]
+
+    def __generate_edges(self):
+    	edges = []
+    	for vertex in self.__graph_dict:
+    		for neighbour in self.__graph_dict[vertex]:
+    			if {neighbour, vertex} not in edges:
+    				edges.append({vertex, neighbour})
+    			return edges
+
+# intitialize graph
+g = {}
+graph = Graph(g)
+
+# read csv file from directory for vertices
 reader = csv.reader(open('StationsHolland.csv', 'rb'), delimiter = ',')
 x = list(reader)
 StationsHolland = numpy.array(x).astype("string")
 
-# ititiate new list with stations
-station_list = []
-
 # iterate over list and append station names to list
 for lijst in StationsHolland:
-	station_list.append(lijst[0])
+	graph.add_vertex(lijst[0])
 
-print station_list
+# read csv file from directory for edges
+reader = csv.reader(open('ConnectiesHolland.csv', 'rb'), delimiter = ',')
+x = list(reader)
+ConnectiesHolland = numpy.array(x).astype("string")
+for lijst in ConnectiesHolland:
+	graph.add_edge({lijst[0],lijst[1]})
+
+print(g)
+

@@ -18,11 +18,19 @@ class Graph(object):
     def add_edge(self, edge):
         edge = set(edge)
         (vertex1, vertex2) = tuple(edge)
-        if vertex1 in self.__graph_dict:
             self.__graph_dict[vertex1].append(vertex2)
+            self.__graph_dict[vertex2].append(vertex1)
+
+    def __generate_edges(self):
+    edges = []
+    for vertex in self.__graph_dict:
+        for neighbour in self.__graph_dict[vertex]:
+            if {neighbour, vertex} not in edges:
+                edges.append({vertex, neighbour})
+    return edges
 
 g = {}
 graph = Graph(g)
 graph.add_vertex('a')
-print(graph.vertices())
+print(g)
 
