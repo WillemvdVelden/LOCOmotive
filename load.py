@@ -6,7 +6,7 @@ import numpy
 
 class Graph(object):
 
-    def __init__(self, graph_dict=None):
+    def __init__(self, graph_dict = None):
         if graph_dict == None:
             graph_dict = {}
         self.__graph_dict = graph_dict
@@ -48,15 +48,15 @@ x = list(reader)
 StationsHolland = numpy.array(x).astype("string")
 
 # iterate over list and append station names to list
-for lijst in StationsHolland:
-	graph.add_vertex(lijst[0])
+for station in StationsHolland:
+	graph.add_vertex(station[0])
 
 # read csv file from directory for edges
 reader = csv.reader(open('ConnectiesHolland.csv', 'rb'), delimiter = ',')
 x = list(reader)
 ConnectiesHolland = numpy.array(x).astype("string")
-for lijst in ConnectiesHolland:
-	graph.add_edge({lijst[0],lijst[1]})
+for connectie in ConnectiesHolland:
+	graph.add_edge({connectie[0], connectie[1]})
 
 print(g)
 
