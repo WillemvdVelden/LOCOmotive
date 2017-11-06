@@ -1,8 +1,5 @@
-
 import csv
 import numpy
-
-
 
 class Graph(object):
 
