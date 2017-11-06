@@ -5,29 +5,29 @@ class Graph(object):
             graph_dict = {}
         self.__graph_dict = graph_dict
 
-	def vertices(self):
+	def stations(self):
 		return list(self.__graph_dict.keys())
 
-	def edges(self):
-		return self.__generate_edges()
+	def connections(self):
+		return self.__generate_connections()
 
-    def add_vertex(self, vertex):
-        if vertex not in self.__graph_dict:
-            self.__graph_dict[vertex] = []
+    def add_station(self, station):
+        if station not in self.__graph_dict:
+            self.__graph_dict[station] = []
 
-    def add_edge(self, edge):
-        edge = set(edge)
-        (vertex1, vertex2) = tuple(edge)
-        if vertex1 in self.__graph_dict:
-        	self.__graph_dict[vertex1].append(vertex2)
-        	self.__graph_dict[vertex2].append(vertex1)
+    def add_connection(self, connection):
+        connection = set(connection)
+        (station1, station2) = tuple(connection)
+        if station1 in self.__graph_dict:
+        	self.__graph_dict[station1].append(station2)
+        	self.__graph_dict[station2].append(station1)
         else:
-            self.__graph_dict[vertex1] = [vertex2]
+            self.__graph_dict[station1] = [station2]
 
-    def __generate_edges(self):
-    	edges = []
-    	for vertex in self.__graph_dict:
-    		for neighbour in self.__graph_dict[vertex]:
-    			if {neighbour, vertex} not in edges:
-    				edges.append({vertex, neighbour})
+    def __generate_connections(self):
+    	connections = []
+    	for station in self.__graph_dict:
+    		for neighbour in self.__graph_dict[station]:
+    			if {neighbour, station} not in connections:
+    				connections.append({station, neighbour})
     			return edges
