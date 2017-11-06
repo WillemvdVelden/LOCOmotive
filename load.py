@@ -1,5 +1,6 @@
 import csv
 import numpy
+from helpers import *
 
 class Graph(object):
 
@@ -39,21 +40,19 @@ class Graph(object):
 g = {}
 graph = Graph(g)
 
-# read csv file from directory for vertices
-reader = csv.reader(open('StationsHolland.csv', 'rb'), delimiter = ',')
-x = list(reader)
-StationsHolland = numpy.array(x).astype("string")
+# read csv file with csv_reader from helpers.py
+StationsHolland = csv_reader('StationsHolland.csv')
 
 # iterate over list and append station names to list
 for station in StationsHolland:
 	graph.add_vertex(station[0])
 
-# read csv file from directory for edges
-reader = csv.reader(open('ConnectiesHolland.csv', 'rb'), delimiter = ',')
-x = list(reader)
-ConnectiesHolland = numpy.array(x).astype("string")
-for connectie in ConnectiesHolland:
-	graph.add_edge({connectie[0], connectie[1]})
+# read csv file with csv_reader from helpers.py
+ConnectionsHolland = csv_reader('ConnectiesHolland.csv')
+
+# iterate over list and append connections to list
+for connection in ConnectionsHolland:
+	graph.add_edge({connection[0], connection[1]})
 
 print(g)
 
