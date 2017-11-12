@@ -9,29 +9,29 @@ try:
 except:
     raise
 
-def draw(G, g, k, n):
-	elarge=[(u,v) for (u,v,d) in G.edges(data = True) if d['type'] == 'Kritiek']
-	esmall=[(u,v) for (u,v,d) in G.edges(data = True) if d['type'] == 'not']
+def draw(graph, c, n):
+	eLarge = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 'critical']
+	eSmall = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 'non-critical']
 
-	pos=nx.get_node_attributes(G,'pos')
 	# positions for all nodes
-	# nodes
-	nx.draw_networkx_nodes(G,pos, nodelist=k, node_color='r', node_size=150, alpha=0.8)
+	pos = nx.get_node_attributes(graph, 'pos')
 
-	nx.draw_networkx_nodes(G,pos,
-		nodelist=n,
-		node_color='b',
-		node_size=50,
-		alpha=0.8)
+	# nodes
+	nx.draw_networkx_nodes(graph, pos, nodelist = c, node_color = 'r', node_size = 150, alpha = 0.8)
+
+	nx.draw_networkx_nodes(graph, pos,
+		nodelist = n,
+		node_color = 'b',
+		node_size = 50,
+		alpha = 0.8)
 
 	# edges
-	nx.draw_networkx_edges(G, pos, edgelist = elarge,
-	                    width = 2)
-	nx.draw_networkx_edges(G,pos,edgelist = esmall,
-	                    width = 2, alpha = 0.5 ,edge_color = 'g',style = 'dashed')
+	nx.draw_networkx_edges(graph, pos, edgelist = eLarge, width = 2)
+	nx.draw_networkx_edges(graph, pos, edgelist = eSmall,
+	                    width = 2, alpha = 0.5, edge_color = 'g', style = 'dashed')
 	                    
 	# labels
-	nx.draw_networkx_labels(G, pos, font_size = 8, font_family = 'sans-serif')
+	nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
 
 	# display
 	plt.show()
