@@ -33,17 +33,23 @@ def main():
             graph.add_edge(connection[0], connection[1], weight = connection[2], type = 'non-critical')
         
     # plot the railway map with all it's attributes
-
+    draw(graph, c, n)
     
-    # initialize an object of class Train
+############## EXAMPLE #############    
+    # initialize an object of class Train (see helpers.py)
     train1 = Train()
+    
+    # see how it looks like directly after creation
     print(train1.currentLocation, train1.previousLocation, train1.traveledTime)
-
+    
+    # let it start at centraal, go to amstel, and then to zuid (see helpers.py)
     updateTrain(train1, 'Amsterdam Centraal', allStations, graph)
     updateTrain(train1, 'Amsterdam Amstel', allStations, graph)
     updateTrain(train1, 'Amsterdam Zuid', allStations, graph)
     
+    # see how it looks like now
     print(train1.currentLocation, train1.previousLocation, train1.traveledTime)
+############## EXAMPLE END #############
 
 # call the main-function
 if __name__ == "__main__":
