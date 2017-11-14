@@ -1,3 +1,10 @@
+import networkx as nx
+
+try:
+    import matplotlib.pyplot as plt
+except:
+    raise
+
 # plot the railway map with all it's attributes
 def draw(graph, criticals, non_criticals):
 	e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 'critical']
