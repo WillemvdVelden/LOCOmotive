@@ -10,9 +10,9 @@ except:
 
 # read csv file from directory for vertices
 def csvReader(csv_name):
-    reader = csv.reader(open(csv_name, 'rb'), delimiter = ',')
+    reader = csv.reader(open(csv_name, 'r'), delimiter = ',')
     reader_list = list(reader)
-    array = numpy.array(reader_list).astype('string')
+    array = numpy.array(reader_list).astype('str')
     return array
     
 # define a class for trains
