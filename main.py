@@ -1,9 +1,10 @@
 import csv
 import numpy
 import networkx as nx
+import operator
 from helpers import *
 from visualize import *
-from pseudo import *
+from dijkstra import *
 
 
 def main():
@@ -35,25 +36,53 @@ def main():
             graph.add_edge(connection[0], connection[1], weight = connection[2], type = 0)
         else:
             graph.add_edge(connection[0], connection[1], weight = connection[2], type = 1)
+    
+    diction = {}
+    new_graph = graph
+    counter = 0
+    
+    while True:
+        station = all_stations[counter]
+        counter += 1
+        for station_to in all_stations:
+            came_from, cost_so_far = dijkstra_search(graph, station, station_to)
+            path, new_graph = reconstruct_path(new_graph, came_from, station, station_to)
+            
+            critical_counter = 0
+            for i in range(len(path) - 1):
+                if graph[path[i]][path[i + 1]]['type'] == 0:
+                    critical_counter += 1
+            
+            diction[critical_counter] = path
+        
+        dic_max = min(diction, key = diction.get)
 
-    came_from, cost_so_far = dijkstra_search(graph, 'Den Haag Centraal', 'Schiedam Centrum')
+        # for i in range(len(path) - 1):
+        #     graph[path[i]][path[i + 1]]['type'] = 1
+
+        e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+
+
+        print(dic_max)
+        if len(e_large) == 0 | counter == len(all_stations)-2:
+            break
     
-    # e_large is the 
-    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
-    print(len(e_large))    
-    
-    path, graph2 = reconstruct_path(graph, came_from, 'Den Haag Centraal', 'Schiedam Centrum')
-    print(path)
-    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
-    print(len(e_large))
-    
-    came_from, cost_so_far = dijkstra_search(graph2, 'Den Haag Centraal', 'Schiedam Centrum')
-    path = reconstruct_path(graph2, came_from, 'Den Haag Centraal', 'Schiedam Centrum')
-    print(path)
-    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
-    print(len(e_large))
-    
-    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    # came_from, cost_so_far = dijkstra_search(graph, 'Den Haag Centraal', 'Schiedam Centrum')
+    #
+    # # the length of e_large is equal to the amount of critical connections
+    # e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    # print(len(e_large))
+    #
+    # path, graph2 = reconstruct_path(graph, came_from, 'Den Haag Centraal', 'Schiedam Centrum')
+    # print(path)
+    # e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    # print(len(e_large))
+    #
+    # came_from, cost_so_far = dijkstra_search(graph2, 'Den Haag Centraal', 'Schiedam Centrum')
+    # path = reconstruct_path(graph2, came_from, 'Den Haag Centraal', 'Schiedam Centrum')
+    # print(path)
+    # e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    # print(len(e_large))
     
     
     # plot the railway map with all it's attributes
