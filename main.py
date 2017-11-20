@@ -4,7 +4,6 @@ import networkx as nx
 from helpers import *
 from visualize import *
 from pseudo import *
-# type value 0 is critical type value 1 is non critical
 
 
 def main():
@@ -19,6 +18,7 @@ def main():
     all_stations = []
     
     # add all stations and attributes to the graph as nodes
+    # type value 0 is critical, type value 1 is non-critical
     for station in stations_holland:
         all_stations.append(station[0])
         if station[3]:
@@ -29,38 +29,37 @@ def main():
             non_criticals.append(station[0])
     
     # add all connections and attributes to the graph as edges
+    # type value 0 is critical, type value 1 is non-critical
     for connection in connections_holland:
         if (connection[0] in criticals) or (connection[1] in criticals):
             graph.add_edge(connection[0], connection[1], weight = connection[2], type = 0)
         else:
             graph.add_edge(connection[0], connection[1], weight = connection[2], type = 1)
-    
 
     came_from, cost_so_far = dijkstra_search(graph, 'Den Haag Centraal', 'Schiedam Centrum')
-
-    path = reconstruct_path(came_from, 'Den Haag Centraal', 'Schiedam Centrum')
+    
+    # e_large is the 
+    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    print(len(e_large))    
+    
+    path, graph2 = reconstruct_path(graph, came_from, 'Den Haag Centraal', 'Schiedam Centrum')
     print(path)
+    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    print(len(e_large))
+    
+    came_from, cost_so_far = dijkstra_search(graph2, 'Den Haag Centraal', 'Schiedam Centrum')
+    path = reconstruct_path(graph2, came_from, 'Den Haag Centraal', 'Schiedam Centrum')
+    print(path)
+    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    print(len(e_large))
+    
+    e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
+    
+    
     # plot the railway map with all it's attributes
-    # draw(graph, criticals, non_criticals)
-    
-# ############## EXAMPLE #############    
-#     # initialize an object of class Train (see helpers.py)
-#     train_1 = Train()
-    
-#     # see how it looks like directly after creation
-#     print(train_1.current_location, train_1.previous_location, train_1.traveled_time)
-    
-#     # let it start at centraal, go to amstel, and then to zuid (see helpers.py)
-#     update_train(train_1, 'Amsterdam Centraal', all_stations, graph)
-#     update_train(train_1, 'Amsterdam Amstel', all_stations, graph)
-#     update_train(train_1, 'Amsterdam Zuid', all_stations, graph)
-    
-#     # see how it looks like now
-#     print(train_1.current_location, train_1.previous_location, train_1.traveled_time)
-# ############## EXAMPLE END #############
+    draw(graph, criticals, non_criticals)
 
 
-# heel path op non critical
 # call the main-function
 if __name__ == "__main__":
     main()
