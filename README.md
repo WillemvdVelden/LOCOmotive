@@ -48,7 +48,7 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## Authors
 
-* **[Jasper Naberman]https://github.com/jasperNaberman)**
+* **[Jasper Naberman](https://github.com/jasperNaberman)**
 * **[Mannus Schomaker](https://github.com/mannusschomaker)**
 * **[Willem van der Velden](https://github.com/WillemvdVelden)**
 
