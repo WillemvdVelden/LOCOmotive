@@ -48,11 +48,11 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## Authors
 
-* **[Jasper Naberman]**(https://github.com/jasperNaberman)
-* **[Mannus Schomaker]**(https://github.com/mannusschomaker)
-* **[Willem van der Velden]**(https://github.com/WillemvdVelden)
+* **[Jasper Naberman]https://github.com/jasperNaberman)**
+* **[Mannus Schomaker](https://github.com/mannusschomaker)**
+* **[Willem van der Velden](https://github.com/WillemvdVelden)**
 
-* **[Wietze Slagman]**(https://github.com/WietzeSlagman) - *TechAssist*
+* **[Wietze Slagman](https://github.com/WietzeSlagman)** - *TechAssist*
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
