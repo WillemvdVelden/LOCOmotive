@@ -19,7 +19,7 @@ Use pip to install the requirered packages from requirement.txt
 pip install -r requirements.txt
 ```
 
-### Installing
+### Installing and run
 
 A step by step series of examples that tell you have to get a development env running
 
@@ -29,22 +29,11 @@ Install requirements.txt to get all the requirered packages
 pip install -r requirements.txt
 ```
 
-And repeat
+And run
 
 ```
-
+python3 main.py
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-
-## Versioning
-
-For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
@@ -54,11 +43,11 @@ For the versions available, see the [tags on this repository](https://github.com
 
 * **[Wietze Slagman](https://github.com/WietzeSlagman)** - *TechAssist*
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/WillemvdVelden/LOCOmotive/graphs/contributors) who participated in this project.
 
 ## Acknowledgments
 
-* Graph class test from: https://www.python-course.eu/graphs_python.php
+* [Graph class test from](https://www.python-course.eu/graphs_python.php)
 
-* Plotting via networkx and matplotlib: https://networkx.github.io/documentation/networkx-1.10/examples/drawing/weighted_graph.html
+* [Plotting via networkx and matplotlib](https://networkx.github.io/documentation/networkx-1.10/examples/drawing/weighted_graph.html)
 
