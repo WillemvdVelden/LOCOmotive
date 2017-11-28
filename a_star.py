@@ -16,7 +16,7 @@ class PriorityQueue:
 
 
 
-def heuristiek(new_cost, new_points, type):
+def heuristic(new_cost, new_points, type):
     if new_cost > 120:
         return 1000
 
@@ -49,7 +49,7 @@ def A_search(graph, start, goal):
             if next not in cost_so_far or new_cost < cost_so_far[next]:
                 cost_so_far[next] = new_cost
                 points_so_far[next] = new_points
-                priority = new_cost + heuristiek(new_cost, new_points, graph[current][next]['type'])
+                priority = new_cost + heuristic(new_cost, new_points, graph[current][next]['type'])
                 print(priority)
                 frontier.put(next, priority)
                 came_from[next] = current
