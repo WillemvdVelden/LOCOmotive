@@ -43,7 +43,7 @@ def A_search(graph, start, goal):
             break
         
         for next in graph.neighbors(current):
-            new_cost = cost_so_far[current] + graph[current][next]['weight'].astype(numpy.int) - (graph[current][next]['type'] * 8)
+            new_cost = cost_so_far[current] + graph[current][next]['weight'].astype(numpy.int) - (graph[current][next]['type'] * 4)
             new_points = points_so_far[current] + graph[current][next]['type'] 
             # print(points_so_far[current])
             if next not in cost_so_far or new_cost < cost_so_far[next]:

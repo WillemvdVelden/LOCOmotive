@@ -53,8 +53,8 @@ def reconstruct_path(graph, came_from, start, goal):
     path.append(start)
     path.reverse()
     
-    # # set edge to non-critical
-    #
+    # set edge to non-critical
+
     # for i in range(len(path) - 1):
     #     graph[path[i]][path[i + 1]]['type'] = 1
     return path, graph
