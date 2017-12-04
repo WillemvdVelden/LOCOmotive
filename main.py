@@ -1,3 +1,11 @@
+# main.py
+# calls all functions and algoritems to solves the problem
+# and compaires different solusoins
+# 
+# heuristics team LOCOmotives
+# team members: jasper, willem, mannus
+#
+
 import csv
 import numpy
 import networkx as nx
