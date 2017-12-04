@@ -22,7 +22,7 @@ def heuristic(new_cost, new_points, type):
 
     # if type == 0:
     #     return 20
-    return - (new_points * 30)
+    return -new_points
 
 
 
