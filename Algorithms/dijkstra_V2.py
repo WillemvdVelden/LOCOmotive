@@ -1,5 +1,15 @@
+# dijkst_V2.py
+# second algorithm
+# finds a high value path from a starting station to a end station
+# 
+# heuristics team LOCOmotives
+# team members: jasper, willem, mannus
+#
+
 import heapq
 import numpy
+
+
 
 # make a class for a priority queue
 class PriorityQueue:
