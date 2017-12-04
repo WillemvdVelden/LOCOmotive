@@ -6,10 +6,10 @@ except:
     raise
 
 # plot the railway map with all it's attributes
-# type value 0 is critical, type value 1 is non-critical
+# type value 1 is critical, type value 0 is non-critical
 def draw(graph, criticals, non_criticals):
-	e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
-	e_small = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1]
+	e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1]
+	e_small = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
 
 	# positions for all nodes
 	pos = nx.get_node_attributes(graph, 'pos')

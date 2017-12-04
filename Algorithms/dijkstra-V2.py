@@ -22,10 +22,9 @@ def heuristic(new_cost, new_points, type):
 
     # if type == 0:
     #     return 20
-    return - (new_points * 30)
+    return (- new_points) 
 
-
-
+# OSPF
 def A_search(graph, start, goal):
     frontier = PriorityQueue()
     frontier.put(start, 0)
@@ -43,20 +42,21 @@ def A_search(graph, start, goal):
             break
         
         for next in graph.neighbors(current):
-            new_cost = cost_so_far[current] + graph[current][next]['weight'].astype(numpy.int) - (graph[current][next]['type'] * 4)
-            new_points = points_so_far[current] + graph[current][next]['type'] 
-            # print(points_so_far[current])
-            if next not in cost_so_far or new_cost < cost_so_far[next]:
+            new_cost = cost_so_far[current] + graph[current][next]['weight'].astype(numpy.int)
+            new_points = points_so_far[current] + graph[current][next]['type']
+            # print(current, next, new_points,heuristic(new_cost, new_points, graph[current][next]['type']))
+            
+            if next not in points_so_far or new_points < points_so_far[next]:
                 cost_so_far[next] = new_cost
                 points_so_far[next] = new_points
-                priority = new_cost + heuristic(new_cost, new_points, graph[current][next]['type'])
-                print(priority)
+                priority = heuristic(new_cost, new_points, graph[current][next]['type'])
+                # print(priority)
                 frontier.put(next, priority)
                 came_from[next] = current
     
     return came_from, cost_so_far
 
-def reconstruct_path(came_from, start, goal):
+def reconstruct_A_star_path(came_from, start, goal):
     current = goal
     path = []
     while current != start:
