@@ -1,4 +1,4 @@
-# dijkst
+# dijksta.py
 # first algorithm
 # finds a high value path from a starting station to a end station
 # 
