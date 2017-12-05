@@ -1,9 +1,9 @@
 # dijkstra_V2.py
 #
 # second algorithm
-# finds a high value path from a starting station to a end station
+# finds a high value path from a starting station to an end station
 # 
-# heuristics team LOCOmotives
+# heuristics team LOCOmotive
 # team members: Jasper, Willem, Mannus
 #
 
