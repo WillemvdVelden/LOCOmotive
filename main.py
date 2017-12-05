@@ -12,12 +12,16 @@ import numpy
 import networkx as nx
 import operator
 import itertools
+import time
 from Functions.helpers import *
 from Functions.visualize import *
 from Algorithms.dijkstra import *
 from Algorithms.dijkstra_V2 import *
 
 def main():
+    # initialize a starting clock to compute the running time of the main-function
+    start = time.clock()
+    
     # read .csv-files with the csv_reader()-function
     stations_holland = csv_reader('datafiles/StationsHolland.csv')
     connections_holland = csv_reader('datafiles/ConnectiesHolland.csv')
@@ -151,7 +155,9 @@ def main():
 
     # plot the railway map with all it's attributes
     # draw(graph, criticals, non_criticals)
-
+    
+    # compute the running time of the main-function
+    compute_running_time(start)
 
 # call the 'main'-function
 if __name__ == "__main__":

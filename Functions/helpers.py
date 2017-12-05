@@ -1,7 +1,8 @@
 # helpers.py
 #
 # defines functions to be used in main.py
-# consists of a csv-reader and a score-function
+# consists of a csv-reader, a score-function
+# and a function to compute the running time of main.py
 # 
 # Heuristics team LOCOmotive
 # Team members: Jasper, Willem, Mannus
@@ -30,4 +31,7 @@ def compute_score(total_critical, leftover_criticals, t, min):
     p = 1 - leftover_criticals / total_critical
     score = p * 10000 - (t * 20 + min / 10000)
     print(score)
-    
+
+# computes the running time of main.py given the starting time of the script
+def compute_running_time(start):
+    print(round(time.clock() - start, 3))
