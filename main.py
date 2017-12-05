@@ -19,8 +19,8 @@ from Algorithms.dijkstra_V2 import *
 
 def main():
     # read .csv-files with the csv_reader()-function
-    stations_holland = csvReader('datafiles/StationsHolland.csv')
-    connections_holland = csvReader('datafiles/ConnectiesHolland.csv')
+    stations_holland = csv_reader('datafiles/StationsHolland.csv')
+    connections_holland = csv_reader('datafiles/ConnectiesHolland.csv')
 
     # initialize graph with package nx
     graph = nx.Graph()
@@ -52,6 +52,9 @@ def main():
     critical_counter = 0
     neighbor_counter = 0
     best_path_weight = 0
+    train_counter = 0
+    minute_counter = 0
+    critical_connections = len([(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1])
 
     for i in range(7):
         counter = 0
@@ -59,8 +62,7 @@ def main():
         critical_counter = 0
         e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
     
-        while True: # not len(e_large) == 0 or not counter == (len(all_stations) - 2):
-            e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
+        while True: # not len(e_large) == 0 or not counter == (len(all_stations) - 2):            
             
             if int(len(e_large)) == 0 or int(counter) == (len(all_stations)):
                 # print("len e_large is: {}".format(len(e_large)))
@@ -70,16 +72,16 @@ def main():
                         
             station = all_stations[counter]            
             
-            neighbor_counter = 0
-            
-            for neighbor in graph.neighbors(station):
-                if graph[station][neighbor]['type'] == 1:
-                    neighbor_counter += 1
-
-            if neighbor_counter == 0:
-                counter += 1
-                if counter != len(all_stations) - 1:
-                    break
+            # neighbor_counter = 0
+            #
+            # for neighbor in new_graph.neighbors(station):
+            #     if new_graph[station][neighbor]['type'] == 1:
+            #         neighbor_counter += 1
+            #
+            # if neighbor_counter == 0:
+            #     counter += 1
+            #     if counter != len(all_stations) - 1:
+            #         break
 
                 # print(neighbor_counter)
                 # print(station)
@@ -105,20 +107,28 @@ def main():
                     critical_counter = critical_counter_2
                     best_path = path
 
-            # e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
-            #
-            # if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
-            #     print("len e_large is: {}".format(len(e_large)))
-            #     print("len all_stations - 1 is: {}".format(len(all_stations) - 1))
-            #     print("counter is: {}".format(int(counter)))
-            #     break
+            e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
+            
+            if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
+                # print("len e_large is: {}".format(len(e_large)))
+                # print("len all_stations - 1 is: {}".format(len(all_stations) - 1))
+                # print("counter is: {}".format(int(counter)))
+                break
 
-        print(best_path)
+        # print(best_path)
+        
+        if len(best_path) != 0:
+            for i in range(len(best_path) - 1):
+                minute_counter += new_graph[best_path[i]][best_path[i + 1]]['weight'].astype(numpy.int)
+            train_counter += 1
+        
         # print(len(best_path))
         for i in range(len(best_path) - 1):
             # print(new_graph[best_path[i]][best_path[i + 1]]['weight'])
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
+    
+    compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)
 
     # came_from, cost_so_far = Dijkstra_V2_search(graph, 'Zaandam', 'Zaandam')
     #
@@ -140,7 +150,7 @@ def main():
 
 
     # plot the railway map with all it's attributes
-    draw(graph, criticals, non_criticals)
+    # draw(graph, criticals, non_criticals)
 
 
 # call the 'main'-function
