@@ -132,7 +132,7 @@ def main():
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
     
-    compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)
+    print(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter))
 
     # came_from, cost_so_far = Dijkstra_V2_search(graph, 'Zaandam', 'Zaandam')
     #
@@ -157,7 +157,7 @@ def main():
     # draw(graph, criticals, non_criticals)
     
     # compute the running time of the main-function
-    compute_running_time(start)
+    print(compute_running_time(start))
 
 # call the 'main'-function
 if __name__ == "__main__":

@@ -30,8 +30,9 @@ def csv_reader(csv_name):
 def compute_score(total_critical, leftover_criticals, t, min):
     p = 1 - leftover_criticals / total_critical
     score = p * 10000 - (t * 20 + min / 10000)
-    print(score)
+    return score
 
 # computes the running time of main.py given the starting time of the script
 def compute_running_time(start):
-    print(round(time.clock() - start, 3))
+    # round the computed time to three decimals
+    return round(time.clock() - start, 3)
