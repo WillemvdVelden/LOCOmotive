@@ -3,8 +3,8 @@
 # second algorithm
 # finds a high value path from a starting station to an end station
 # 
-# heuristics team LOCOmotive
-# team members: Jasper, Willem, Mannus
+# Heuristics team LOCOmotive
+# Team members: Jasper, Willem, Mannus
 #
 
 import heapq

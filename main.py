@@ -3,8 +3,8 @@
 # calls all functions and algorithms to solves the problem
 # and compaires different solutions
 # 
-# heuristics team LOCOmotive
-# team members: Jasper, Willem, Mannus
+# Heuristics team LOCOmotive
+# Team members: Jasper, Willem, Mannus
 #
 
 import csv
