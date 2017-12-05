@@ -22,10 +22,9 @@ def heuristic(new_cost, new_points, type):
 
     # if type == 0:
     #     return 20
-    return (- new_points) 
+    return -new_points
 
-# OSPF
-def A_search(graph, start, goal):
+def Dijkstra_V2_search(graph, start, goal):
     frontier = PriorityQueue()
     frontier.put(start, 0)
     came_from = {}
@@ -56,7 +55,7 @@ def A_search(graph, start, goal):
     
     return came_from, cost_so_far
 
-def reconstruct_A_star_path(came_from, start, goal):
+def reconstruct_Dijkstra_V2_path(came_from, start, goal):
     current = goal
     path = []
     while current != start:
