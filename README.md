@@ -4,16 +4,20 @@ Course: Heuristieken
 Case: RailNL  
 Teammembers: Mannus Schomaker, Jasper Naberman, Willem van der Velden  
 
-We take on this problem by representing the railway map in a graph. For this we use the package NetworkX (https://networkx.github.io).  
-In main.py define the stations as nodes, and the connections between stations as edges.  
-We also declare the graph to be a weighted graph, with 2 types of weights.  
-One type is if a node/edge is critical or non-critical, the other type is the amount of minutes it takes for a train to use an edge between stations.  
+The goal of this case is to create the optimal line management for trains in (part of) The Netherlands.  
+Routes must we defined for a maximum amount of trains, for which each train has a contraint of a given time limit.  
+RailNL (the relevant Dutch railway-company) has given a score-function to compute a score for a certain solution of the problem.  
+The score is highest when as few trains as possible are used, these trains ride as short as possible, and visit as many critical connections within the given time limit.
 
-In this repository you will find several folders, in which there are different files that are imported by main.py.  
-In the 'Algorithms'-folder several algorithm functions are located. At the moment some of these are used in main.py.  
-In the 'Concepts'-folder older concepts for the solving of this case are located. These are not used by main.py any more.  
-In the 'Datafiles'-folder the given .csv-files are located. These are imported in main.py with help from a reader-function from helpers.py.  
-In the 'Functions'-folder several 'extra'-functions are located. These are imported and called in main.py. In visualize.py a draw()-function is defined to draw a given graph as a map. In helpers.py functions for csv-reading, score calculation and time calculation are defined.  
+We take on this problem by representing the railway map in a graph data structure. For this we use the package NetworkX (https://networkx.github.io).  
+In main.py define the stations as nodes, and the connections between stations as edges.  
+We also declare the graph to be a weighted graph, with 2 types of weights. One type is whether a node or edge is (non-)critical, the other type is the amount of minutes it takes for a train to use a connection between stations.  
+
+In this repository you will find several folders, in which there are different files that are imported by main.py: 
+* In the 'Algorithms'-folder several algorithm functions are located. At the moment some of these are used in main.py.  
+* In the 'Concepts'-folder older concepts for the solving of this case are located. These are not used by main.py any more.  
+* In the 'Datafiles'-folder the given .csv-files are located. These are imported in main.py with help from a reader-function from helpers.py.  
+* In the 'Functions'-folder several 'extra'-functions are located. These are imported and called in main.py. In visualize.py a draw()-function is defined to draw a given graph as a map. In helpers.py functions for csv-reading, score calculation and time calculation are defined.  
 
 ## Installing and Prerequisites
 
