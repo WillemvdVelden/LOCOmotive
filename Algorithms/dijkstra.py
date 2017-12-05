@@ -1,3 +1,12 @@
+# dijksta.py
+# first algorithm
+# finds a high value path from a starting station to a end station
+# 
+# heuristics team LOCOmotives
+# team members: jasper, willem, mannus
+#
+
+
 import heapq
 import numpy
 import networkx as nx

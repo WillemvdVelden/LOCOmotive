@@ -1,3 +1,12 @@
+# main.py
+#
+# calls all functions and algoritems to solves the problem
+# and compaires different solusoins
+# 
+# heuristics team LOCOmotives
+# team members: Jasper, Willem, Mannus
+#
+
 import csv
 import numpy
 import networkx as nx
@@ -83,7 +92,7 @@ def main():
             for station_to in all_stations:
                 critical_counter_2 = 0
                 came_from, cost_so_far = Dijkstra_V2_search(new_graph, station, station_to)
-                path = reconstruct_Dijkstra_V2_path(came_from, station, station_to)
+                path = reconstruct_A_star_path(came_from, station, station_to)
                 
                 path_weight = 0
                 
@@ -118,14 +127,14 @@ def main():
     # e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
     # print(len(e_large))
     #
-    # path = reconstruct_Dijkstra_V2_path(came_from, 'Zaandam', 'Zaandam')
+    # path = reconstruct_A_star_path(came_from, 'Zaandam', 'Zaandam')
     # print(path)
     #
     # e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
     # print(len(e_large))
     #
     # came_from, cost_so_far = Dijkstra_V2_search(graph, 'Schiphol Airport', 'Zaandam')
-    # path = reconstruct_Dijkstra_V2_path(came_from, 'Schiphol Airport', 'Zaandam')
+    # path = reconstruct_A_star_path(came_from, 'Schiphol Airport', 'Zaandam')
     # print(path)
     # e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
     # print(len(e_large))

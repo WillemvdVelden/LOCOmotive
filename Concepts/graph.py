@@ -1,3 +1,11 @@
+# graph.py
+# grapy structure
+# creates a graph node structure from 2 csv files
+# 
+# heuristics team LOCOmotives
+# team members: jasper, willem, mannus
+#
+
 class Graph(object):
 
     def __init__(self, graph_dict = None):
