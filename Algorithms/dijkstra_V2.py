@@ -59,7 +59,7 @@ def Dijkstra_V2_search(graph, start, goal):
             new_points = points_so_far[current] + graph[current][next]['type']
             # print(current, next, new_points,heuristic(new_cost, new_points, graph[current][next]['type']))
             
-            # check node only if it could be proviteble 
+            # check node only if it could be provitable 
             if next not in points_so_far or new_points < points_so_far[next]:
                 cost_so_far[next] = new_cost
                 points_so_far[next] = new_points
