@@ -1,4 +1,4 @@
-# bfs.py
+# gbfs.py
 # third algorithm
 # greedy breadth first search is an algorithm for searching graph data 
 # structures.
@@ -8,7 +8,6 @@
 #
 
 import collections
-import numpy
 
 class Queue:
     def __init__(self):
@@ -24,55 +23,28 @@ class Queue:
         return self.elements.popleft()
 
 
-
-def breadth_first_search_V2(graph, start):
-    max_points = 0
-    goal = ""
+def breadth_first_search(graph, start, goal):
     frontier = Queue()
     frontier.put(start)
     came_from = {}
-    cost_so_far = {}
-    points_so_far = {}
     came_from[start] = None
-    cost_so_far[start] = 0
-    points_so_far[start] = 0 
-
-    counter = 0
     
     while not frontier.empty():
         current = frontier.get()
-        counter += 1
-
-        if cost_so_far[current] > 120:
+        
+        if current == goal:
             break
-
+        
         for next in graph.neighbors(current):
-            # print(current)
-            # print(next)
-            new_cost = cost_so_far[current] + graph[current][next]['weight'].astype(numpy.int)
             if next not in came_from:
-                new_points = points_so_far[current] + graph[current][next]['type']
-            # print(new_points, end="")
-            # print(" = cost")
-            if new_points >= max_points:
-                    max_points = new_points
-                    goal = next 
-            if next != current:
-                cost_so_far[next] = new_cost
-                points_so_far[next] = new_points
                 frontier.put(next)
                 came_from[next] = current
-        # print(maxpoints, end="")
-        # print(" = max")
     
-    # print(goal)
-    return came_from, goal     
+    return came_from
 
 # get the correct path from Dijkstra's algorithm
-def reconstruct_path_bfs_V2(came_from, start, goal):
-    # print(goal)
+def reconstruct_path_bfs(came_from, start, goal):
     current = goal
-
     path = []
     while current != start:
         path.append(current)
