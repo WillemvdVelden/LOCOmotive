@@ -60,5 +60,5 @@ def reconstruct_path(graph, came_from, start, goal):
     path.append(start)
     path.reverse()
     
-    return path, graph
+    return path
     

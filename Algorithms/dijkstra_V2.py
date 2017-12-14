@@ -60,7 +60,6 @@ def Dijkstra_V2_search(graph, start, goal, max_time):
                 cost_so_far[next] = new_cost
                 points_so_far[next] = new_points
                 priority = heuristic(new_cost, new_points, graph[current][next]['type'], max_time)
-                # print(priority)
                 frontier.put(next, priority)
                 came_from[next] = current
     

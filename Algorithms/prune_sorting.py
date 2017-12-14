@@ -27,7 +27,7 @@ def pruning_outside(graph, all_stations, max_time):
         for next in graph.neighbors(station):
             neighbors_count += 1
             if new_graph[next][station]['type'] == 1:
-                neighbors_count_critical +=1
+                neighbors_count_critical += 1
         if neighbors_count == 1 and neighbors_count_critical == 1:
             prune_stations.append(station)
     
