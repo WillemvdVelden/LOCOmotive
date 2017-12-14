@@ -25,16 +25,13 @@ class PriorityQueue:
         return heapq.heappop(self.elements)[1]
 
 # added heuristics for priority queue
-def heuristic(new_cost, new_points, type):
-    if new_cost > 120:
+def heuristic(new_cost, new_points, type, max_time):
+    if new_cost > max_time:
         return 1000
-
-    # if type == 0:
-    #     return 20
     return -new_points
 
 # looking through the graph
-def Dijkstra_V2_search(graph, start, goal):
+def Dijkstra_V2_search(graph, start, goal, max_time):
     # initialize variables
     frontier = PriorityQueue()
     frontier.put(start, 0)
@@ -55,15 +52,14 @@ def Dijkstra_V2_search(graph, start, goal):
         
         # check every neighbor of current node
         for next in graph.neighbors(current):
-            new_cost = cost_so_far[current] + graph[current][next]['weight'].astype(numpy.int)
+            new_cost = cost_so_far[current] + int(graph[current][next]['weight'])
             new_points = points_so_far[current] + graph[current][next]['type']
-            # print(current, next, new_points,heuristic(new_cost, new_points, graph[current][next]['type']))
             
             # check node only if it could be provitable 
             if next not in points_so_far or new_points < points_so_far[next]:
                 cost_so_far[next] = new_cost
                 points_so_far[next] = new_points
-                priority = heuristic(new_cost, new_points, graph[current][next]['type'])
+                priority = heuristic(new_cost, new_points, graph[current][next]['type'], max_time)
                 # print(priority)
                 frontier.put(next, priority)
                 came_from[next] = current

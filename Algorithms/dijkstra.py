@@ -45,9 +45,7 @@ def dijkstra_search(graph, start, goal):
             new_cost = cost_so_far[current] + graph[current][next]['type']
             if next not in cost_so_far or new_cost < cost_so_far[next]:
                 cost_so_far[next] = new_cost
-                #print(cost_so_far)
                 priority = new_cost
-                #print(priority)
                 frontier.put(next, priority)
                 came_from[next] = current
     return came_from, cost_so_far
@@ -62,9 +60,5 @@ def reconstruct_path(graph, came_from, start, goal):
     path.append(start)
     path.reverse()
     
-    # set edge to non-critical
-
-    # for i in range(len(path) - 1):
-    #     graph[path[i]][path[i + 1]]['type'] = 1
     return path, graph
     

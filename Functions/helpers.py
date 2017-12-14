@@ -8,9 +8,6 @@
 # Team members: Jasper, Willem, Mannus
 #
 
-import csv
-import numpy
-import networkx as nx
 from main import *
 
 try:
@@ -22,6 +19,9 @@ except:
 def csv_reader(csv_name):
     reader = csv.reader(open(csv_name, 'r'), delimiter = ',')
     reader_list = list(reader)
+    for station in reader_list:
+        if (len(station) == 3):
+            station.append('')
     array = numpy.array(reader_list).astype('str')
     return array
 
@@ -29,7 +29,8 @@ def csv_reader(csv_name):
 # the amount of trains used and the sum of minutes ridden by all trains
 def compute_score(total_critical, leftover_criticals, t, min):
     p = 1 - leftover_criticals / total_critical
-    score = p * 10000 - (t * 20 + min / 10000)
+    # compute the score and round to three decimals
+    score = round(p * 10000 - (t * 20 + min / 10000), 3)
     return score
 
 # computes the running time of main.py given the starting time of the script
@@ -38,17 +39,15 @@ def compute_running_time(start):
     return round(time.clock() - start, 3)
     
 # function for the Dijkstra V2 algorithm
-def Dijkstra_V2_function(graph, all_stations):
+def Dijkstra_V2_function(graph, all_stations, max_trains, max_time, train_counter, minute_counter):
     new_graph = graph
     counter = 0
     critical_counter = 0
     neighbor_counter = 0
     best_path_weight = 0
-    train_counter = 0
-    minute_counter = 0
     critical_connections = len([(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1])
 
-    for i in range(7):
+    for i in range(max_trains):
         counter = 0
         best_path = []
         critical_counter = 0
@@ -65,13 +64,13 @@ def Dijkstra_V2_function(graph, all_stations):
             
             for station_to in all_stations:
                 critical_counter_2 = 0
-                came_from, cost_so_far = Dijkstra_V2_search(new_graph, station, station_to)
+                came_from, cost_so_far = Dijkstra_V2_search(new_graph, station, station_to, max_time)
                 path = reconstruct_Dijkstra_V2_path(came_from, station, station_to)
                 
                 path_weight = 0
                 
                 for i in range(len(path) - 1):
-                    path_weight += new_graph[path[i]][path[i + 1]]['weight'].astype(numpy.int)
+                    path_weight += int(new_graph[path[i]][path[i + 1]]['weight'])
                     if new_graph[path[i]][path[i + 1]]['type'] == 1:
                         critical_counter_2 += 1
                 
@@ -87,20 +86,21 @@ def Dijkstra_V2_function(graph, all_stations):
         
         if len(best_path) != 0:
             for i in range(len(best_path) - 1):
-                minute_counter += new_graph[best_path[i]][best_path[i + 1]]['weight'].astype(numpy.int)
+                minute_counter += int(new_graph[best_path[i]][best_path[i + 1]]['weight'])
             train_counter += 1
         
         for i in range(len(best_path) - 1):
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
-                new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
-    
+                new_graph[best_path[i]][best_path[i + 1]]['type'] = 0    
     print()
     print("Dijkstra's V2")
     print()
-    print("Score: {}".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))    
+    print("Trains used: {} out of {}.".format(train_counter, max_trains))
+    print("Score: {} out of 10000.".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))
+    return new_graph
     
 # function for the breadth first search algorithm
-def bfs_function(graph, all_stations):
+def bfs_function(graph, all_stations, max_trains):
     new_graph = graph
     counter = 0
     critical_counter = 0
@@ -110,7 +110,7 @@ def bfs_function(graph, all_stations):
     minute_counter = 0
     critical_connections = len([(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1])
 
-    for i in range(7):
+    for i in range(max_trains):
         counter = 0
         best_path = []
         critical_counter = 0
@@ -133,7 +133,7 @@ def bfs_function(graph, all_stations):
                 path_weight = 0
                 
                 for i in range(len(path) - 1):
-                    path_weight += new_graph[path[i]][path[i + 1]]['weight'].astype(numpy.int)
+                    path_weight += int(new_graph[path[i]][path[i + 1]]['weight'])
                     if new_graph[path[i]][path[i + 1]]['type'] == 1:
                         critical_counter_2 += 1
                 
@@ -145,32 +145,26 @@ def bfs_function(graph, all_stations):
             e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
             
             if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
-                # print("len e_large is: {}".format(len(e_large)))
-                # print("len all_stations - 1 is: {}".format(len(all_stations) - 1))
-                # print("counter is: {}".format(int(counter)))
                 break
-
-        # print(best_path)
         
         if len(best_path) != 0:
             for i in range(len(best_path) - 1):
-                minute_counter += new_graph[best_path[i]][best_path[i + 1]]['weight'].astype(numpy.int)
+                minute_counter += int(new_graph[best_path[i]][best_path[i + 1]]['weight'])
             train_counter += 1
         
-        # print(len(best_path))
         for i in range(len(best_path) - 1):
-            # print(new_graph[best_path[i]][best_path[i + 1]]['weight'])
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
     
     print()
     print("Breadth First Search")
     print()
-    print("Score: {}".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))
+    print("Trains used: {} out of {}.".format(train_counter, max_trains))
+    print("Score: {} out of 10000.".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))
     
     
 # function for the breadth first search algorithm
-def bfs_V2_function(graph, all_stations):
+def bfs_V2_function(graph, all_stations, max_trains):
     new_graph = graph
     counter = 0
     critical_counter = 0
@@ -180,7 +174,7 @@ def bfs_V2_function(graph, all_stations):
     minute_counter = 0
     critical_connections = len([(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1])
 
-    for i in range(7):
+    for i in range(max_trains):
         counter = 0
         best_path = []
         critical_counter = 0
@@ -203,7 +197,7 @@ def bfs_V2_function(graph, all_stations):
             path_weight = 0
             
             for i in range(len(path) - 1):
-                path_weight += new_graph[path[i]][path[i + 1]]['weight'].astype(numpy.int)
+                path_weight += int(new_graph[path[i]][path[i + 1]]['weight'])
                 if new_graph[path[i]][path[i + 1]]['type'] == 1:
                     critical_counter_2 += 1
             
@@ -215,25 +209,19 @@ def bfs_V2_function(graph, all_stations):
             e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
             
             if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
-                # print("len e_large is: {}".format(len(e_large)))
-                # print("len all_stations - 1 is: {}".format(len(all_stations) - 1))
-                # print("counter is: {}".format(int(counter)))
                 break
-
-        # print(best_path)
         
         if len(best_path) != 0:
             for i in range(len(best_path) - 1):
-                minute_counter += new_graph[best_path[i]][best_path[i + 1]]['weight'].astype(numpy.int)
+                minute_counter += int(new_graph[best_path[i]][best_path[i + 1]]['weight'])
             train_counter += 1
         
-        # print(len(best_path))
         for i in range(len(best_path) - 1):
-            # print(new_graph[best_path[i]][best_path[i + 1]]['weight'])
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
     
     print()
     print("Breadth First Search V2")
     print()
-    print("Score: {}".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))
+    print("Trains used: {} out of {}.".format(train_counter, max_trains))
+    print("Score: {} out of 10000.".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))
