@@ -1,11 +1,10 @@
-# gbfs.py
-# third algorithm
-# greedy breadth first search is an algorithm for searching graph data 
-# structures.
+# breadth_first_search.py
 # 
-# heuristics team LOCOmotives
-# team members: jasper, willem, mannus
+# Breadth first search is an algorithm for searching graph data structures.
+# 
+# Heuristics team LOCOmotive
 #
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
 
 import collections
 

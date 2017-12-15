@@ -6,6 +6,14 @@
 # team members: jasper, willem, mannus
 #
 
+# prune_sorting.py
+# 
+# Starts Dijkstra V2 algorithm at a path with only one (critical) connection.
+# 
+# Heuristics team LOCOmotive
+#
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
+
 import numpy
 import networkx as nx
 
@@ -19,7 +27,6 @@ def pruning_outside(graph, all_stations, max_time):
     time_used = 0
     best_prune_paths = []
     best_prune = []
-
 
     for station in all_stations:
         neighbors_count = 0

@@ -1,3 +1,11 @@
+# visualize_routes.py
+#
+# visualizes the train routes taken by a certain algorithm on the map
+# 
+# Heuristics team LOCOmotive
+#
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
+
 import networkx as nx
 
 try:

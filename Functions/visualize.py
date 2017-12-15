@@ -1,3 +1,11 @@
+# visualize.py
+#
+# Visualizes the default maps of the railway networks.
+# 
+# Heuristics team LOCOmotive
+#
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
+
 import networkx as nx
 
 try:
@@ -27,8 +35,8 @@ def draw(graph, criticals, non_criticals, max_trains):
 	                    width = 2, alpha = 0.5, edge_color = 'g', style = 'dashed')
 	                    
 	# labels
-    #nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
-    
+    nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
+
 	nx.draw_networkx_edge_labels(graph, pos, edge_labels = edge_labels, font_size = 8, font_family = 'sans-serif')
         
     # display

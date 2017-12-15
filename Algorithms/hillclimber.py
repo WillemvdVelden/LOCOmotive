@@ -1,3 +1,12 @@
+# hillclimber.py
+# 
+# hillclimber algorithm that picks a random node, and makes a path
+# from there by picking random neighbours.
+# 
+# Heuristics team LOCOmotive
+#
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
+
 from main import *
 
 def hillclimber(graph, path, iters):

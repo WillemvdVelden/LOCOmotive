@@ -1,11 +1,11 @@
 # main.py
 #
-# calls all functions and algorithms to solves the problem
-# and compaires different solutions
+# Let's the user chose what kind of map he/she wants, what kind of connections,
+# what kind of algorithm, and possible extensions of that algorithm.
 # 
 # Heuristics team LOCOmotive
-# Team members: Jasper, Willem, Mannus
 #
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
 
 import csv
 import numpy
@@ -44,7 +44,7 @@ def main():
     print("For a map with default connection values, type: 0")
     print("For a map with only critical connections, type: 1")
     print()
-    connection_type = input("Connection-type: ")
+    connection_type = input("Connection type: ")
     
     
     # read .csv-files with the csv_reader-function
@@ -66,8 +66,6 @@ def main():
     print("For Dijkstra's algorithm, type: 0")
     print("For Dijkstra's algorithm Version 2, type: 1")
     print("For a breadth first search algorithm, type: 2")
-    print("For a breadth first search algorithm Version 2, type: 3")
-    print("For a hillclimber algorithm, type: 4")
     print()
     algorithm_type = input("Algorithm: ")
     
@@ -133,8 +131,6 @@ def main():
             sys.exit("Please provide valid input.")            
     elif (int(algorithm_type) == 2):
         bfs_function(graph, all_stations, max_trains, max_time)
-    elif (int(algorithm_type) == 3):
-        bfs_V2_function(graph, all_stations, max_trains, max_time)
     else:
         print()
         sys.exit("Please provide valid input.")

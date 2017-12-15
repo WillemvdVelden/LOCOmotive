@@ -1,3 +1,12 @@
+# simulated_annealing.py
+# 
+# Uses a hillclimber algorithm but sometimes accepts setbacks to possibly come
+# to a better solution.
+# 
+# Heuristics team LOCOmotive
+#
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
+
 from main import *
 
 def sim_ann(path):
@@ -17,7 +26,7 @@ def sim_ann(path):
         inters += 1
 
         for i in range(10):
-            path = hilclimber(graph, path, 10)
+            path = hillclimber(graph, path, 10)
             critical_start_new = 0
             for i in range(len(path) - 1):
                 critical_start_new += int(graph[path[i]][path[i + 1]]['type'])

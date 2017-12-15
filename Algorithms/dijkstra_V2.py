@@ -1,11 +1,11 @@
 # dijkstra_V2.py
-#
-# second algorithm
-# finds a high value path from a starting station to an end station
+# 
+# Finds a high value path from a starting station to an end station.
+# Uses a heuristic for time constraints.
 # 
 # Heuristics team LOCOmotive
-# Team members: Jasper, Willem, Mannus
 #
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
 
 import heapq
 import numpy

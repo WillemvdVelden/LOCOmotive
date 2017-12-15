@@ -1,11 +1,10 @@
-# bfs.py
-# third algorithm
-# greedy breadth first search is an algorithm for searching graph data 
-# structures.
+# breadth_first_search_V2.py
 # 
-# heuristics team LOCOmotives
-# team members: jasper, willem, mannus
+# Breadth first search is an algorithm for searching graph data structures.
+# 
+# Heuristics team LOCOmotive
 #
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
 
 import collections
 import numpy
@@ -72,3 +71,66 @@ def reconstruct_path_bfs_V2(came_from, start, goal):
     path.reverse()
     
     return path   
+    
+# function for the breadth first search algorithm
+def bfs_V2_function(graph, all_stations, max_trains):
+    new_graph = graph
+    counter = 0
+    critical_counter = 0
+    neighbor_counter = 0
+    best_path_weight = 0
+    train_counter = 0
+    minute_counter = 0
+    critical_connections = len([(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1])
+
+    for i in range(max_trains):
+        counter = 0
+        best_path = []
+        critical_counter = 0
+        e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
+    
+        while True:          
+            
+            if int(len(e_large)) == 0 or int(counter) == (len(all_stations)):
+                break
+
+            station = all_stations[counter]
+            
+            counter += 1
+            print("pat")
+            critical_counter_2 = 0
+            came_from, goal = breadth_first_search_V2(new_graph, station)
+            print(1)
+            path = reconstruct_path_bfs_V2(came_from, station, goal)
+            
+            path_weight = 0
+            
+            for i in range(len(path) - 1):
+                path_weight += int(new_graph[path[i]][path[i + 1]]['weight'])
+                if new_graph[path[i]][path[i + 1]]['type'] == 1:
+                    critical_counter_2 += 1
+            
+            if critical_counter < critical_counter_2 or ((critical_counter_2 == critical_counter) and (best_path_weight > path_weight)):
+                best_path_weight = path_weight
+                critical_counter = critical_counter_2
+                best_path = path
+
+            e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
+            
+            if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
+                break
+        
+        if len(best_path) != 0:
+            for i in range(len(best_path) - 1):
+                minute_counter += int(new_graph[best_path[i]][best_path[i + 1]]['weight'])
+            train_counter += 1
+        
+        for i in range(len(best_path) - 1):
+            if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
+                new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
+    
+    print()
+    print("Breadth First Search V2")
+    print()
+    print("Trains used: {} out of {}.".format(train_counter, max_trains))
+    print("Score: {} out of 10000.".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))

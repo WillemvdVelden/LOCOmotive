@@ -1,10 +1,9 @@
 # graph.py
-# grapy structure
-# creates a graph node structure from 2 csv files
+# Graph structure
+# Creates a graph node structure from 2 csv files
 # 
-# heuristics team LOCOmotives
-# team members: jasper, willem, mannus
-#
+# Heuristics team LOCOmotive
+# Teammembers: Jasper Naberman, Mannus Scomaker, Willem van der Velden
 
 class Graph(object):
 
