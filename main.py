@@ -100,7 +100,7 @@ def main():
                 graph[connection[0]][connection[1]]['type'] = 0
             else:
                 graph[connection[0]][connection[1]]['type'] = 1
-    
+        
     # calling algorithm-functions from helpers
     # if (int(algorithm_type) == 0):
     if (int(algorithm_type) == 0):

@@ -7,7 +7,7 @@ except:
 
 # plot the railway map with all it's attributes
 # type value 1 is critical, type value 0 is non-critical
-def draw_routes(graph, criticals, non_criticals, train_counter):  
+def draw_routes(graph, criticals, non_criticals, train_counter, max_trains):  
     
     routes = []
     
@@ -37,7 +37,8 @@ def draw_routes(graph, criticals, non_criticals, train_counter):
         nx.draw_networkx_edges(graph, pos, edgelist = routes[i], width = 2, edge_color = colors[i])
                     
     # labels
-    nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
+    if (int(max_trains) == 7):
+        nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
 
     nx.draw_networkx_edge_labels(graph, pos, edge_labels = edge_labels, font_size = 8, font_family = 'sans-serif')
     

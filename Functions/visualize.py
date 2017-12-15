@@ -7,7 +7,7 @@ except:
 
 # plot the railway map with all it's attributes
 # type value 1 is critical, type value 0 is non-critical
-def draw(graph, criticals, non_criticals):
+def draw(graph, criticals, non_criticals, max_trains):
 	e_large = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1]
 	e_small = [(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 0]
 
@@ -27,7 +27,7 @@ def draw(graph, criticals, non_criticals):
 	                    width = 2, alpha = 0.5, edge_color = 'g', style = 'dashed')
 	                    
 	# labels
-	nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
+    #nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
     
 	nx.draw_networkx_edge_labels(graph, pos, edge_labels = edge_labels, font_size = 8, font_family = 'sans-serif')
         

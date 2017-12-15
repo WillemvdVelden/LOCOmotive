@@ -167,7 +167,7 @@ def dijkstra_V2_function(graph, all_stations, max_trains, max_time, train_counte
     print()
     print("Trains used: {} out of {}.".format(train_counter, max_trains))
     print("Score: {} out of 10000.".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))
-    draw_routes(graph, criticals, non_criticals, train_counter)
+    draw_routes(graph, criticals, non_criticals, train_counter, max_trains)
     return new_graph
     
 # function for the breadth first search algorithm
