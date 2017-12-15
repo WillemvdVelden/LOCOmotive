@@ -107,7 +107,7 @@ def dijkstra_function(graph, all_stations, max_trains):
     print("Score: {} out of 10000.".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))   
     
 # function for the Dijkstra V2 algorithm
-def dijkstra_V2_function(graph, all_stations, max_trains, max_time, train_counter, minute_counter, criticals, non_criticals):
+def dijkstra_V2_function(graph, all_stations, max_trains, max_time, train_counter, minute_counter, criticals, non_criticals, hillclimber_use):
     new_graph = graph
     counter = 0
     critical_counter = 0
@@ -151,6 +151,10 @@ def dijkstra_V2_function(graph, all_stations, max_trains, max_time, train_counte
             
             if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
                 break
+        
+        if (hillclimber_use in ('y', 'Y', 'yes', 'Yes', 'YES')):
+            if (len(best_path) != 0):
+                hillclimber(new_graph, best_path, 1000)
         
         if len(best_path) != 0:
             for i in range(len(best_path) - 1):

@@ -14,6 +14,8 @@ import operator
 import itertools
 import time
 import sys
+import random
+import copy
 
 from Functions.helpers import *
 from Functions.visualize import *
@@ -23,6 +25,7 @@ from Algorithms.dijkstra_V2 import *
 from Algorithms.breadth_first_search import *
 from Algorithms.breadth_first_search_V2 import *
 from Algorithms.prune_sorting import *
+from Algorithms.hillclimber import *
 
 def main():
     # initialize a starting clock to compute the running time of the main-function
@@ -42,6 +45,7 @@ def main():
     print("For a map with only critical connections, type: 1")
     print()
     connection_type = input("Connection-type: ")
+    
     
     # read .csv-files with the csv_reader-function
     if (int(map_type) == 0):
@@ -63,6 +67,7 @@ def main():
     print("For Dijkstra's algorithm Version 2, type: 1")
     print("For a breadth first search algorithm, type: 2")
     print("For a breadth first search algorithm Version 2, type: 3")
+    print("For a hillclimber algorithm, type: 4")
     print()
     algorithm_type = input("Algorithm: ")
     
@@ -112,11 +117,17 @@ def main():
         print()
         pruning_type = input("Sorting algorithm: ")
         
+        print()
+        print("Do you wish to use a hillclimber algorithm on top of Dijkstra's algorithm Version 2?")
+        print("If yes, type 'y'. If no, type 'n'.")
+        print()
+        hillclimber_use = input("Hillclimber algorithm: ")
+        
         if (pruning_type in ('y', 'Y', 'yes', 'Yes', 'YES')):
             new_graph, prune_station_count, time_used = pruning_outside(graph, all_stations, max_time)
-            new_graph = dijkstra_V2_function(new_graph, all_stations, max_trains, max_time, prune_station_count, time_used, criticals, non_criticals)
+            new_graph = dijkstra_V2_function(new_graph, all_stations, max_trains, max_time, prune_station_count, time_used, criticals, non_criticals, hillclimber_use)
         elif (pruning_type in ('n', 'N', 'no', 'No', 'NO')):
-            new_graph = dijkstra_V2_function(graph, all_stations, max_trains, max_time, 0, 0, criticals, non_criticals)
+            new_graph = dijkstra_V2_function(graph, all_stations, max_trains, max_time, 0, 0, criticals, non_criticals, hillclimber_use)
         else:
             print()
             sys.exit("Please provide valid input.")            
