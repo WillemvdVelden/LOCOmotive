@@ -50,12 +50,13 @@ def hillclimber(graph, path, iters, max_time):
 
         critical_counter_2 = 0
         
-        # set the taken path to non-critical
+        # set the taken path to non-critical and count the value of each path
         for i in range(len(test_path) - 1):
             if new_graph[test_path[i]][test_path[i + 1]]['type'] == 1:
                 critical_counter_2 += 1
                 new_graph[test_path[i]][test_path[i + 1]]['type'] = 0
 
+        # if the new path is the best path so far save it
         if critical_counter < critical_counter_2 or ((critical_counter_2 == critical_counter) and (best_path_weight > path_weight)):
             best_path_weight = path_weight
             critical_counter = critical_counter_2

@@ -31,13 +31,7 @@ def draw(graph, criticals, non_criticals, max_trains):
 
 	# edges
 	nx.draw_networkx_edges(graph, pos, edgelist = e_large, width = 2)
-	nx.draw_networkx_edges(graph, pos, edgelist = e_small,
-	                    width = 2, alpha = 0.5, edge_color = 'g', style = 'dashed')
-	
-	# labels
-    # nx.draw_networkx_labels(graph, pos, font_size = 8, font_family = 'sans-serif')
-    
-    # nx.draw_networkx_edge_labels(graph, pos, edge_labels = edge_labels, font_size = 8, font_family = 'sans-serif')
-        
+	nx.draw_networkx_edges(graph, pos, edgelist = e_small, width = 2, alpha = 0.5, edge_color = 'g', style = 'dashed')
+   
     # display
 	plt.show()

@@ -52,8 +52,8 @@ def dijkstra_function(graph, criticals, non_criticals, all_stations, max_trains)
     best_path_weight = 0
     train_counter = 0
     minute_counter = 0
-    critical_connections = len([(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1])
-    
+    critical_connections = len([(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 0])
+
     # iterate over the maximum amount of trains allowed on the map
     for i in range(max_trains):
             counter = 0
@@ -101,6 +101,7 @@ def dijkstra_function(graph, criticals, non_criticals, all_stations, max_trains)
             
             # set the type of the taken path to non-critical
             for i in range(len(best_path) - 1):
+                new_graph[best_path[i]][best_path[i + 1]]['train'] = train_counter
                 if new_graph[best_path[i]][best_path[i + 1]]['type'] == 0:
                     new_graph[best_path[i]][best_path[i + 1]]['type'] = 1
     
@@ -159,11 +160,11 @@ def dijkstra_V2_function(graph, all_stations, max_trains, max_time, train_counte
             
             if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
                 break
-        
+
         # use the hillclimber algorithm when asked for
         if (hillclimber_use in ('y', 'Y', 'yes', 'Yes', 'YES')):
             if (len(best_path) != 0):
-                hillclimber(new_graph, best_path, 1000, max_time)
+                hillclimber(new_graph, best_path, 100000, max_time)
         
         # compute the amount of minutes a certain path takes
         if len(best_path) != 0:
@@ -176,6 +177,7 @@ def dijkstra_V2_function(graph, all_stations, max_trains, max_time, train_counte
             new_graph[best_path[i]][best_path[i + 1]]['train'] = train_counter
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0 
+
     
     # print the results of the algorithm
     print()
@@ -244,8 +246,11 @@ def bfs_function(graph, criticals, non_criticals, all_stations, max_trains, minu
         
         # set the type of the taken path to non-critical
         for i in range(len(best_path) - 1):
+            new_graph[best_path[i]][best_path[i + 1]]['train'] = train_counter
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
+        
+        
     
     # print the results of the algorithm
     print()
@@ -255,4 +260,6 @@ def bfs_function(graph, criticals, non_criticals, all_stations, max_trains, minu
     print("Score: {} out of 10000.".format(compute_score(critical_connections, int(len(e_large)), train_counter, minute_counter)))
     
     draw_routes(graph, criticals, non_criticals, train_counter, max_trains)
+
+
     
