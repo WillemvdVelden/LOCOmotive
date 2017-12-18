@@ -17,3 +17,5 @@ As final function in helpers.py there is a function that calculates the time pas
 * **[Willem van der Velden](https://github.com/WillemvdVelden)**
 
 * **[Wietze Slagman](https://github.com/WietzeSlagman)** - *TechAssist*
+
+presentation: https://docs.google.com/presentation/d/1ufXQyA9SLurCr-6NdnVGH4m3rQdOeE5Jnq0sMkf8Fd8/edit?usp=sharing
