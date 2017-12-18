@@ -8,6 +8,7 @@
 
 import collections
 
+# initialize a queue-class
 class Queue:
     def __init__(self):
         self.elements = collections.deque()
@@ -50,9 +51,6 @@ def reconstruct_path_bfs(came_from, start, goal):
         current = came_from[current]
     path.append(start)
     path.reverse()
-    
-    # set edge to non-critical
 
-    # for i in range(len(path) - 1):
-    #     graph[path[i]][path[i + 1]]['type'] = 1
-    return path   
+    return path
+    

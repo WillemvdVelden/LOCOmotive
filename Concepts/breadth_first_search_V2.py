@@ -9,6 +9,7 @@
 import collections
 import numpy
 
+# initialize a queue-class
 class Queue:
     def __init__(self):
         self.elements = collections.deque()
@@ -21,8 +22,6 @@ class Queue:
     
     def get(self):
         return self.elements.popleft()
-
-
 
 def breadth_first_search_V2(graph, start):
     max_points = 0
@@ -38,6 +37,7 @@ def breadth_first_search_V2(graph, start):
 
     counter = 0
     
+    # loop while the queue is not empty
     while not frontier.empty():
         current = frontier.get()
         counter += 1
@@ -82,7 +82,8 @@ def bfs_V2_function(graph, all_stations, max_trains):
     train_counter = 0
     minute_counter = 0
     critical_connections = len([(u, v) for (u, v, d) in graph.edges(data = True) if d['type'] == 1])
-
+    
+    # iterate over the maximum amount of trains allowed on the map
     for i in range(max_trains):
         counter = 0
         best_path = []
@@ -90,7 +91,7 @@ def bfs_V2_function(graph, all_stations, max_trains):
         e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
     
         while True:          
-            
+            # break if there are no more criticals or starting points left
             if int(len(e_large)) == 0 or int(counter) == (len(all_stations)):
                 break
 
@@ -114,21 +115,24 @@ def bfs_V2_function(graph, all_stations, max_trains):
                 best_path_weight = path_weight
                 critical_counter = critical_counter_2
                 best_path = path
-
+            
             e_large = [(u, v) for (u, v, d) in new_graph.edges(data = True) if d['type'] == 1]
             
             if int(len(e_large)) == 0 or int(counter) == (len(all_stations) - 1):
                 break
         
+        # compute the amount of minutes a certain path takes
         if len(best_path) != 0:
             for i in range(len(best_path) - 1):
                 minute_counter += int(new_graph[best_path[i]][best_path[i + 1]]['weight'])
             train_counter += 1
         
+        # set the type of the taken path to non-critical
         for i in range(len(best_path) - 1):
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
     
+    # print the results of the algorithm
     print()
     print("Breadth First Search V2")
     print()

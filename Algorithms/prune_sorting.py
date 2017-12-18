@@ -19,15 +19,16 @@ import networkx as nx
 
 from Algorithms.dijkstra_V2 import *
 
+# a pruning algorithm for sorting Dijkstra V2's order
 def pruning_outside(graph, all_stations, max_time):
-    
     new_graph = graph
     prune_stations =[]
     critical_counter = 0
     time_used = 0
     best_prune_paths = []
     best_prune = []
-
+    
+    # check which stations have 1 neighbour, that's also critical
     for station in all_stations:
         neighbors_count = 0
         neighbors_count_critical = 0
@@ -38,6 +39,7 @@ def pruning_outside(graph, all_stations, max_time):
         if neighbors_count == 1 and neighbors_count_critical == 1:
             prune_stations.append(station)
     
+    # use Dijkstra V2 to arrange a path from these stations first
     for station in prune_stations:
         for station_to in all_stations:
             critical_counter_2 = 0
@@ -54,17 +56,15 @@ def pruning_outside(graph, all_stations, max_time):
                 best_path_weight = path_weight
                 critical_counter = critical_counter_2
                 best_prune = path
+                
         best_prune_paths.append(best_prune)
         time_used += best_path_weight
+    
+    # set the taken path to non-critical    
     for best_path in best_prune_paths:
         for i in range(len(best_path) - 1):
             if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
                 new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
-
-        for i in range(len(best_path) - 1):
-                if new_graph[best_path[i]][best_path[i + 1]]['type'] == 1:
-                    new_graph[best_path[i]][best_path[i + 1]]['type'] = 0
-    
-
-    
+                    
     return new_graph, len(prune_stations), time_used
+    

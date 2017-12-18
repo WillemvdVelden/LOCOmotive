@@ -10,7 +10,7 @@
 import heapq
 import numpy
 
-# make a class for a priority queue
+# initialize a priority queue
 class PriorityQueue:
     def __init__(self):
         self.elements = []
@@ -72,6 +72,6 @@ def reconstruct_Dijkstra_V2_path(came_from, start, goal):
     while current != start:
         path.append(current)
         current = came_from[current]
-    path.append(start) # optional
-    path.reverse() # optional
+    path.append(start)
+    path.reverse()
     return path

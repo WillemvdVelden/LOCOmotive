@@ -10,7 +10,7 @@ import heapq
 import numpy
 import networkx as nx
 
-# make a priority queue
+# initialize a priority queue
 class PriorityQueue:
     def __init__(self):
         self.elements = []
@@ -60,4 +60,3 @@ def reconstruct_path(graph, came_from, start, goal):
     path.reverse()
     
     return path
-    
