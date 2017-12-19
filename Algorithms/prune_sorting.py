@@ -48,9 +48,6 @@ def pruning_outside(graph, all_stations, max_time):
             came_from, cost_so_far = Dijkstra_V2_search(new_graph, station, station_to, max_time)
             path = reconstruct_Dijkstra_V2_path(came_from, station, station_to)
             
-
-            hillclimber(new_graph, path, 10000, max_time)
-            print(path)
             path_weight = 0
             for i in range(len(path) - 1):
                         path_weight += int(new_graph[path[i]][path[i + 1]]['weight'])
@@ -64,7 +61,6 @@ def pruning_outside(graph, all_stations, max_time):
                 
         best_prune_paths.append(best_prune)
         time_used += best_path_weight
-        print(best_prune)
     
     # set the taken path to non-critical    
     for best_path in best_prune_paths:
